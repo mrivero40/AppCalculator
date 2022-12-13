@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Matemática</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+            background-color:   #dbdae0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-block: 2rem;
+            color: #143f4b;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            color: #232738;
+            margin-block: 5rem;
+        }        
+
+        main .mathematics .examples-container {
+            width: 30rem;
+            height: 35rem;
+            background-color: #143f4b;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 1px 1px 20px 4px rgba(163, 159, 159, 0.9);            
+            border-radius: 1rem;
+            padding-inline: 1rem;
+            padding-block: 1rem;
+            margin: 2rem auto;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 1.8rem;
+        }
+
+        .mathematics .examples-container label, h3 {
+            color: #dbdae0;
+            text-align: center;
+        }
+
+        .mathematics .examples-container p, .examples-result {
+            color: #dbdae0;
+            text-align: center;
+        }
+
+        .mathematics .examples-container button {
+            margin-block: 1rem;
+            padding-block: .5rem;
+            padding-inline: 1.5rem;
+            border: none;
+            border-radius: 1rem;
+            background-color: #F5B041;
+            color: #232738;
+            font-size: 2rem;
+        }
+
+        .analisis-container {
+            display: flex;
+            flex-direction: column;
+            place-items: center;
+            margin-block-end: 40rem;
+        }
+
+        .analisis-container .info-container {
+            width: 100vw;
+            height: auto;
+            font-size: 1.8rem;
+            text-align: center;            
+            background-color: #F5B041; 
+            padding-block: 2rem;
+            padding-inline: .5rem;
+            border-radius: 1rem;
+        }
+
+        .analisis-container .info-container h3, p, label {
+            color: #232738;
+            margin-block: 1rem;
+        }
+
+        .p-result-name {
+            font-weight: bold;
+        }
+
+        .btn-calc-persona {
+            margin-block: 1rem;
+            margin-inline: 2rem;
+            padding: .5rem 1rem;
+            border: none;
+            border-radius: .5rem;
+            background-color: #143f4b;
+            color:#dbdae0;
+            font-size: 2rem;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <h1>Taller práctico JS de matemática y estadística</h1>
+
+        <section class="mathematics">
+
+            <h2>Figuras Geométricas</h2>
+
+            <div class="examples-container">
+                <h3>Rectángulo Perímetro | Área</h3>
+                <p>Ingresar lados para calcular:</p>
+                <label for="rectanguloLadoA"><strong>Lado A</strong></label>
+                <input id="rectanguloLadoA" type="number">
+                <label for="rectanguloLadoB"><strong>Lado B</strong></label>
+                <input id="rectanguloLadoB" type="number">
+                <button id="btnRectangulo">Calcular</button>
+                <p id="RectResult" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Triángulo Escaleno Altura</h3>
+                <p>Ingresar lados para calcular</p>
+                <label for="trianguloLadoA">Lado A: <input id="trianguloLadoA" type="number"></label>                               
+                <label for="trianguloLadoB">Lado B: <input id="trianguloLadoB" type="number"></label>                                
+                <label for="trianguloBase">Base: <input id="trianguloBase" type="number"></label>                                
+                <button id="btnTriangulo">Calcular</button>
+                <p id="trianguloResult" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Circunferencia</h3>
+                <p>Ingresar radio para calcular</p>
+                <label for="radioCirculo">Radio</label>
+                <input id="radioCirculo" type="number">
+                <button id="btnCirculo">Calcular</button>
+                <p id="pCirculoResult" class="examples-result"></p>
+            </div>
+
+
+            <h2>Precios y Descuentos</h2>
+
+            <div class="examples-container">
+                <h3>Calcular Descuento</h3>
+                <p>Ingresa los importes</p>
+                <label for="price">Importe:</label>
+                <input id="price" type="number">
+                <label for="discount">Descuento:</label>
+                <input id="discount" type="number">
+                <button id="btnCalcular">Calcular</button>
+                <p id="pPriceResult" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Calcular Cupón</h3>
+                <p>Ingresa los datos</p>
+                <label for="priceCoupon">Importe:</label>
+                <input id="priceCoupon" type="number">
+                <label for="coupon">Cupón:</label>
+                <input id="coupon" type="text">
+                <button id="btnCalcCoupon">Calcular</button>
+                <p id="pPriceCoupon" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Calcular Cupón con array.find</h3>
+                <p>Ingresa los datos</p>
+                <label for="priceFind">Importe:</label>
+                <input id="priceFind" type="number">
+                <label for="couponFind">Cupón:</label>
+                <input id="couponFind" type="text">
+                <button id="btnCalcFind">Calcular</button>
+                <p id="pPriceFind" class="examples-result"></p>
+            </div>
+
+            <h2>Estadística básica</h2>
+
+            <div class="examples-container">
+                <h3>Calcular Promedio</h3>
+                <p>Usa coma para separar valores</p>
+                <label for="numbersPromedio">Importes:</label>
+                <input id="numbersPromedio" type="text">
+                <button id="btnCalcPromedio">Promedio</button>
+                <p id="pResultPromedio" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Calcular Promedio con array.reduce</h3>
+                <p>Usa coma para separar valores</p>
+                <label for="listNumReduce">Importes:</label>
+                <input id="listNumReduce" type="text">
+                <button id="btnCalcReduce">Calcular</button>
+                <p id="pResultReduce" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Lista Par o impar?</h3>
+                <p>Usa coma para separar valores</p>
+                <label for="listParImpar">Importes:</label>
+                <input id="listParImpar" type="text">
+                <button id="btnParImpar">Calcular</button>
+                <p id="pResulParImpar" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Mediana a partir de una lista</h3>
+                <p>Usa coma para separar valores</p>
+                <label for="listMediana">Importes:</label>
+                <input id="listMediana" type="text">
+                <button id="btnMediana">Calcular</button>
+                <p id="pResulMediana" class="examples-result"></p>
+            </div>
+
+            <div class="examples-container">
+                <h3>Moda a partir de una lista</h3>
+                <p>Usa coma para separar valores</p>
+                <label for="listModa">Importes:</label>
+                <input id="listModa" type="text">
+                <button id="btnModa">Calcular</button>
+                <p id="pResultModa" class="examples-result"></p>
+            </div>
+
+        </section>
+
+        <section class="analisis-container">
+            <h2>Analisis Salarial</h2>
+            <div class="info-container">
+                <h3>Elegir persona para información salarial:</h3>
+                <label for="selectPersonal">Seleccionar</label>
+                <select id="selectPersonal">
+                    <option value="">--Nombre del empleado--</option>
+                </select>
+                <button id="btnPersonal" type="text">Mostrar</button>
+                <p id="pPersonal"></p>
+                <div id="divContainerPersonal">
+                    <p id="pResultPersonal"></p>
+                </div>
+                <div id="btnContainer"></div>
+                <div id="divCalcResult"></div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script>
+
+        // CUADRADO
+        console.group('Cuadrado');
+
+        const ladoCuadrado = 5;
+        const perimetroCuadrado = ladoCuadrado * 4;
+        const areaCuadrado = Math.pow(ladoCuadrado, 2); // = ladoCuadrado**2
+        console.log({
+            ladoCuadrado,
+            perimetroCuadrado,
+            areaCuadrado,
+        });
+
+        const inputRectA = document.querySelector('#rectanguloLadoA');
+        const inputRectB = document.querySelector('#rectanguloLadoB');
+        const btnRectCalcular = document.querySelector('#btnRectangulo');
+        const pRectResult = document.querySelector('#RectResult');
+        btnRectCalcular.addEventListener('click', calcularRect);
+
+        function calcularRect() {
+            const ladoRectA = Number(inputRectA.value);
+            const ladoRectB = Number(inputRectB.value);
+            const perimetroRect = (ladoRectA + ladoRectB) * 2;
+            const areaRect = ladoRectA * ladoRectB;
+            pRectResult.innerText = `- Perímetro: ${perimetroRect} cm
+                                    - Área: ${areaRect} cm²`;
+        };
+
+        console.groupEnd();
+
+
+        // TRIANGULO
+        console.group('Triángulo');
+
+        const ladoTriangulo1 = 6;
+        const ladoTriangulo2 = 6;
+        const baseTriangulo = 4;
+        const alturaTriangulo = 5.5;
+        const perimetroTriangulo = ladoTriangulo1 + ladoTriangulo2 + baseTriangulo;
+        const areaTriangulo = (baseTriangulo * alturaTriangulo) / 2;
+        console.log({
+            ladoTriangulo1,
+            ladoTriangulo2,
+            baseTriangulo,
+            alturaTriangulo,
+            perimetroTriangulo,
+            areaTriangulo,
+        });
+
+        function calcularTriangulo(lado1, lado2, base, altura) {
+            return {
+                perimetro: lado1 + lado2 + base,
+                area: (base * altura) / 2,
+            };
+        };
+
+        // función para calcular altura de un isosceles
+        function calcularAlturaTriangulo(lado1, base) {
+            if (lado1 == base) {
+                console.warn('No es un triángulo Isósceles');
+            } else {
+                // form: h = raizcuadrada(lado1**2 - (base**2)/4)
+                return Math.sqrt((lado1 ** 2) - (base ** 2) / 4);
+            };
+        };
+
+        const inputEscalenoA = document.querySelector('#trianguloLadoA');
+        const inputEscalenoB = document.querySelector('#trianguloLadoB');
+        const inputEscalenoBase = document.querySelector('#trianguloBase');
+        const btnEscaleno = document.querySelector('#btnTriangulo');
+        const pEscalenoResult = document.querySelector('#trianguloResult');
+
+        btnEscaleno.addEventListener('click', () => {
+            const ladoEscalenoA = Number(inputEscalenoA.value);
+            const ladoEscalenoB = Number(inputEscalenoB.value);
+            const ladoEscalenoBase = Number(inputEscalenoBase.value);
+            calcularAlturaEscaleno(ladoEscalenoA, ladoEscalenoB, ladoEscalenoBase);
+        });
+
+        // función para calcular altura de un escaleno
+        function calcularAlturaEscaleno(lado1, lado2, base) {
+            const semiperimetro = (lado1 + lado2 + base) / 2;
+            if ((lado1 != lado2) & (lado1 != base) & (lado2 != base)) {
+                const resultado = ((2 / base) * (Math.sqrt(semiperimetro * (semiperimetro - base) * (semiperimetro - lado1) * (semiperimetro - lado2))));
+                pEscalenoResult.innerText = `Altura: ${resultado.toFixed(2)} cm`;
+            } else {
+                console.warn('Los datos ingresados no pertenes a un triángulo escaleno');
+                pEscalenoResult.innerText = 'Los datos ingresados no pertenes a un triángulo escaleno';
+            };
+        };
+
+        function solution(lado1, lado2, lado3) {
+            const semiperimetro = (lado1 + lado2 + lado3) / 2;
+            if ((lado1 != lado2) & (lado1 != lado3) & (lado2 != lado3)) {
+                return parseInt((2 / lado1) * (Math.sqrt(semiperimetro * (semiperimetro - lado1) * (semiperimetro - lado2) * (semiperimetro - lado3))));
+            } else {
+                return false;
+            };
+        };
+
+        console.groupEnd();
+
+
+        // CIRCULO
+        console.group('Circulo');
+        const radioCirculo = 3;
+        const diametroCirculo = radioCirculo * 2;
+        const PI = Math.PI;
+        const circunferencia = diametroCirculo * PI;
+        const areaCirculo = (radioCirculo ** 2) * PI;
+        console.log({
+            radioCirculo,
+            diametroCirculo,
+            PI,
+            circunferencia,
+            areaCirculo,
+        });
+
+        const radio = document.querySelector('#radioCirculo');
+        const btnCirculo = document.querySelector('#btnCirculo');
+        const pCirculo = document.querySelector('#pCirculoResult');
+        btnCirculo.addEventListener('click', () => {
+            calcularCirculo(radio.value);
+        });
+
+        function calcularCirculo(radio) {
+            const diametro = radio * 2;
+            const radioAlCuadrado = Math.pow(radio, 2);
+            pCirculo.innerText = `Circunferencia: ${(diametro * PI).toFixed(2)} cm
+                                  Área: ${(radioAlCuadrado * PI).toFixed(2)} cm²`;
+        };
+
+        console.groupEnd();
+
+
+        // PRECIOS Y DESCUENTO
+        const MhMath = {}
+        // Calcular descuento sobre precio original
+        const inputPrice = document.querySelector('#price');
+        const inputDiscount = document.querySelector('#discount');
+        const btnPriceDiscount = document.querySelector('#btnCalcular');
+        const pPriceResult = document.querySelector('#pPriceResult');
+        btnPriceDiscount.addEventListener('click', MhMath.descuentos = () => {
+            if (!inputPrice.value || !inputDiscount.value) {
+                pPriceResult.innerText = 'debes completar todos los datos';
+                return;
+            };
+            if (inputDiscount.value > 50) {
+                pPriceResult.innerText = 'lo siento no podemos ofrecerte ese descuento';
+                return;
+            };
+            pPriceResult.innerText = 'Precio con descuento: $' + inputPrice.value * (100 - inputDiscount.value) / 100;
+        });
+
+
+        // Descuento con cupón sobre precio original
+        const inputPriceProduct = document.querySelector('#priceCoupon');
+        const inputPriceCoupon = document.querySelector('#coupon');
+        const btnCoupon = document.querySelector('#btnCalcCoupon');
+        const pResultCoupon = document.querySelector('#pPriceCoupon');
+
+        const coupons = [
+            { name: 'MH20', discount: 20 },
+            { name: 'MH30', discount: 30 },
+            { name: 'MH40', discount: 40 },
+            { name: 'MH50', discount: 50 },
+        ];
+
+        btnCoupon.addEventListener('click', MhMath.descuentosCupon = () => {
+            pResultCoupon.innerText = 'Cupón inválido!! Precio: $' + inputPriceProduct.value;
+
+            coupons.forEach(element => {
+                if (element.name === inputPriceCoupon.value) {
+                    pResultCoupon.innerText = 'Precio con descuento: $' + inputPriceProduct.value * (100 - element.discount) / 100;
+                };
+            });
+        });
+
+
+        // Descuento con cupón con método find de los arrays
+        const inputPriceFind = document.querySelector('#priceFind');
+        const inputCouponFind = document.querySelector('#couponFind');
+        const btnCalcFind = document.querySelector('#btnCalcFind');
+        const pPriceFind = document.querySelector('#pPriceFind');
+
+        const arrayCoupon = [
+            { name: 'MH20', discount: 20 },
+            { name: 'MH30', discount: 30 },
+            { name: 'MH40', discount: 40 },
+            { name: 'MH50', discount: 50 },
+        ];        
+
+        btnCalcFind.addEventListener('click', MhMath.descuentosCuponFind = () => {
+
+            function couponValidate(element) {
+                return element.name == inputCouponFind.value;
+            };
+            const couponFind = arrayCoupon.find(couponValidate);
+
+            if (couponFind) {
+                pPriceFind.innerText = `Precio con descuento $${inputPriceFind.value * (100 - couponFind.discount) / 100}`;
+            } else {
+                pPriceFind.innerText = `Cupón inválido!! Precio: $${inputPriceFind.value}`;
+            };
+        });
+
+
+        // PROMEDIOS
+        // Promedio a partir de lista de números       
+        MhMath.calcularPromedioSinRender = (list) => {
+            let arraySuma = 0;
+
+            for (i = 0; i < list.length; i++) {
+                arraySuma += (list[i]);
+            };
+
+            return arraySuma / list.length;
+        };
+
+
+        const btnPromedio = document.querySelector('#btnCalcPromedio');
+        const pPromedio = document.querySelector('#pResultPromedio');
+        btnPromedio.addEventListener('click', calcularPromedio);
+
+        function calcularPromedio() {
+            const inputPromedio = document.querySelector('#numbersPromedio').value;
+            const inputInArray = inputPromedio.split(',');
+            let arrayNumber = 0;
+
+            for (i = 0; i < inputInArray.length; i++) {
+                arrayNumber += Number(inputInArray[i]);
+            }
+
+            pPromedio.innerText = "Promedio: " + arrayNumber / inputInArray.length;
+        };
+
+
+        // Promedio a partir de lista de números con método reduce de los array        
+        const btnCalcReduce = document.querySelector('#btnCalcReduce');
+        const pResultReduce = document.querySelector('#pResultReduce');
+
+        btnCalcReduce.addEventListener('click', MhMath.calcularPromedioReduce = () => {
+
+            const inputListNum = document.querySelector('#listNumReduce').value;
+            const listArray = inputListNum.split(',');
+            const newArrayNumber = [];
+
+            for (item of listArray) {
+                newArrayNumber.push(Number(item));
+            };
+
+            const sumaList = newArrayNumber.reduce((acumulado, nuevoValor) => acumulado + nuevoValor);
+            const promedio = sumaList / listArray.length;
+            pResultReduce.innerText = `Promedio: ${promedio}`;
+        });
+
+
+        // PAR O IMPAR
+        // Funcion que retorna si la cantidad de elemento de una lista es par o impar        
+        const btnParImpar = document.querySelector('#btnParImpar');
+        const pParImpar = document.querySelector('#pResulParImpar');
+        btnParImpar.addEventListener('click', calcularParImpar);
+
+        function calcularParImpar() {
+            const inputListParImpar = document.querySelector('#listParImpar').value;
+            const arrayListParImpar = inputListParImpar.split(',');
+
+            if ((arrayListParImpar.length % 2) == 0) {
+                pParImpar.innerText = 'Tu lista es PAR';
+            } else {
+                pParImpar.innerText = 'Tu lista es IMPAR';
+            };
+        };
+
+
+        // funciones que retornan true o false según corresponda
+        MhMath.esPar = (lista) => (lista.length % 2) == 0;
+        MhMath.esImpar = (lista) => (lista.length % 2) == 1;
+
+
+        // MEDIANA
+        // función para calcular la mediana de una lista par o impar de elementos
+        MhMath.calcularMediana = function calcularMediana(list) {
+            const listOrder = list.sort((a, b) => a - b);
+            if (MhMath.esPar(listOrder)) {
+                const indexList1 = Math.floor(listOrder.length / 2);
+                const indexList2 = Math.ceil(listOrder.length / 2) - 1;
+                const medianaPar = (listOrder[indexList1] + listOrder[indexList2]) / 2;
+                console.log(medianaPar);
+                return medianaPar;
+            } else {
+                const indexList = Math.floor(listOrder.length / 2);
+                const medianaImpar = listOrder[indexList];
+                console.log(medianaImpar);
+                return medianaImpar;
+            };
+        };
+
+
+        // función para calcular la mediana a partir de datos ingresados en html
+        const btnMediana = document.querySelector('#btnMediana');
+        btnMediana.addEventListener('click', () => {
+            const listMediana = document.querySelector('#listMediana').value;
+            const listArrayMediana = listMediana.split(',');
+            const listArrayMedianaNumber = [];
+
+            for (element of listArrayMediana) {
+                listArrayMedianaNumber.push(Number(element));
+            };
+
+            const pResultMediana = document.querySelector('#pResulMediana');
+            pResultMediana.innerText = 'Mediana: ' + MhMath.calcularMediana(listArrayMedianaNumber);
+        });
+
+
+        // MODA
+        // Función calcularModa(). Agrega a un objeto las llaves y valores que se repiten, y luego convertirlo a un array ordenado (de menor a mayor). Para luego obtener la última posición donde se encuentra la moda.
+        MhMath.calcularModa = function calcularModa(list) {
+            const listCount = {};
+
+            for (i in list) {
+                const element = list[i];
+
+                if (listCount[element]) {
+                    listCount[element] += 1;
+                } else {
+                    listCount[element] = 1;
+                };
+            };
+
+            const listArray = Object.entries(listCount);
+            const listArrayOrder = listArray.sort((a, b) => a[1] - b[1]);
+            const listArrayModa = listArrayOrder[listArrayOrder.length - 1];
+            const moda = listArrayModa[0];
+
+            console.log({
+                listCount,
+                listArray,
+                listArrayOrder,
+                listArrayModa,
+            });
+
+            if (listArrayModa[1] == listArrayOrder[listArrayOrder.length - 2][1]) {
+                return 'no existe MODA, porque hay 2 elementos con la misma frecuencia';
+            } else {
+                return `Moda: ${moda}`;
+            };
+        };
+
+        // Función para calcular la Moda a partir de una lista en html, utilizando la función calcularModa(list).
+        const btnModa = document.querySelector('#btnModa').addEventListener('click', renderModa);
+
+        function renderModa() {
+            const listModa = document.querySelector('#listModa').value;
+            const listModaArray = listModa.split(',');
+            const pResultModa = document.querySelector('#pResultModa');
+
+            pResultModa.innerText = MhMath.calcularModa(listModaArray);
+        };
+
+    </script>
+
+    <script src="./salarios.js"></script>
+    <script src="./analisis.js"></script>
+
+</body>
+
+</html>
