@@ -190,13 +190,16 @@ function renderInfoPersonal() {
         });
 
         btnProyeccionPersona.addEventListener('click', () => {
-            //const divCalcResult = document.querySelector('#divCalcResult');
+            const divCalcResult = document.querySelector('#divCalcResult');
             divCalcResult.innerText = '';
-            const pCalcResult = document.createElement('p');
-            pCalcResult.innerText = 
-                `La mediana de salarios de ${objPersona.name} es de u$${medianaXPersona(objPersona.name)}`;
-            pCalcResult.style.fontWeight='bold';
-            divCalcResult.appendChild(pCalcResult);
+            const arrayProyeccion = proyeccionSalarial(objPersona.name);
+            
+            for ( proyeccion of arrayProyeccion ) {
+                const pCalcResult = document.createElement('p');
+                pCalcResult.style.fontWeight='bold';
+                pCalcResult.innerText = `Año: ${proyeccion.year} | Sueldo: ${proyeccion.sueldo.toFixed(0)}`;
+                divCalcResult.appendChild(pCalcResult);
+            };            
         });
     });
 };
