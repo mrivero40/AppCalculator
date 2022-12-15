@@ -18,27 +18,33 @@
 
         html {
             font-size: 62.5%;
-            background-color:   #dbdae0;
+            background-color:#dbdae0;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-align: center;
-            margin-block: 2rem;
-            color: #143f4b;
-        }
+        }        
 
         h2 {
             font-size: 2rem;
             text-align: center;
             color: #232738;
             margin-block: 5rem;
-        }        
+        }
 
+        /* header */
+        .header-container {
+            display: flex;
+            place-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 10rem;
+            background-color: #568ec6;
+            color: #dbdae0;
+            font-size: 2rem;            
+        }
+
+        /* Geometría, descuentos y promedios */
         main .mathematics .examples-container {
             width: 100vw;
             height: auto;
@@ -54,12 +60,14 @@
             font-size: 1.8rem;
         }
 
-        .mathematics .examples-container label, h3 {
-            color: #dbdae0;
+        .mathematics .examples-container h3 {
+            color: #F5B041;
             text-align: center;
+            font-size: 2.5rem;
+            margin-block: 1rem;
         }
 
-        .mathematics .examples-container p, .examples-result {
+        .mathematics .examples-container label, p, .examples-result {
             color: #dbdae0;
             text-align: center;
         }
@@ -70,16 +78,17 @@
             padding-inline: 1.5rem;
             border: none;
             border-radius: 1rem;
-            background-color: #F5B041;
+            background-color: #568ec6;
             color: #232738;
             font-size: 2rem;
         }
 
+        /* Análisis salarial */
         .analisis-container {
             display: flex;
             flex-direction: column;
             place-items: center;
-            margin-block-end: 40rem;
+            margin-block-end: 10rem;
         }
 
         .analisis-container .info-container {
@@ -92,16 +101,20 @@
             padding-inline: .5rem;
         }
 
-        .analisis-container .info-container h3, p, label {
+        .analisis-container .info-container h3 {
+            color: #143f4b;
+        }
+
+        .analisis-container .info-container p, label {
             color: #232738;
             margin-block: 1rem;
         }
 
-        .p-result-name {
+        .analisis-container .info-container .p-result-name {
             font-weight: bold;
         }
 
-        .btn-calc-persona {
+        .analisis-container .info-container .btn-calc-persona {
             margin-block: 1rem;
             margin-inline: 2rem;
             padding: .5rem 1rem;
@@ -112,16 +125,41 @@
             font-size: 2rem;
         }
 
+        /* Footer */
+        footer .footer{
+            width: 100%;
+            height: 10rem;
+            background-color: #568ec6;
+            margin-block-start: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer .icon-redes img {
+            width: 4rem;
+        }
+        footer .icon-redes {
+            padding-inline: 1.5rem;
+        }
+
+        footer h5 {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-block: 1rem;
+        }
+        
     </style>
 </head>
 
 <body>
 
     <main>
-        <h1>Taller práctico JS de matemática y estadística</h1>
+        <header class="header-container">
+            <h1>App Web Calcular</h1>
+
+        </header>
 
         <section class="mathematics">
-
             <h2>Figuras Geométricas</h2>
 
             <div class="examples-container">
@@ -240,7 +278,7 @@
         </section>
 
         <section class="analisis-container">
-            <h2>Analisis Salarial</h2>
+            <h2>Analisis Salarial x Empleado</h2>
             <div class="info-container">
                 <h3>Elegir persona para información salarial:</h3>
                 <label for="selectPersonal">Seleccionar</label>
@@ -256,6 +294,63 @@
                 <div id="divCalcResult"></div>
             </div>
         </section>
+
+        <section class="analisis-container">
+            <h2>Analisis de sueldos x Empresa</h2>
+            <div class="info-container">
+                <h3>Elegir Empresa para más información:</h3>
+                <label for="selectEmpresa">Seleccionar</label>
+                <select id="selectEmpresa">
+                    <option value="">--Nombre de la Empresa--</option>
+                </select>
+                <button id="btnEmpresa" class="btn-calc-persona" type="text">Buscar</button>
+                <p id="pEmpresa"></p>
+                <div id="divContainerEmpresa">
+                </div>
+                <div id="btnContainerEmpresa"></div>
+                <div id="divCalcResultEmpresa"></div>
+            </div>
+        </section>
+
+
+        <footer>
+
+            <div class="footer">            
+    
+                <figure class="icon-redes">
+                  <a href="https://facebook.com/matiasriveromh" target="_blank">
+                    <img src="https://mendohardware.com.ar/img/facebook.png" alt="logo facebook">
+                  </a>
+                </figure>
+                
+                <figure class="icon-redes">
+                  <a href="https://twitter.com/mezequiel40" target="_blank">
+                    <img src="https://mendohardware.com.ar/img/twitter.png" alt="logo twitter">
+                  </a>
+                </figure>
+    
+                <figure class="icon-redes">
+                    <a href="https://github.com/mrivero40" target="_blank">
+                      <img src="https://mendohardware.com.ar/img/github.png" alt="logo github">
+                    </a>
+                  </figure>
+    
+                <figure class="icon-redes">
+                  <a href="https://wa.me/+542615538661" target="_blank">
+                    <img src="https://mendohardware.com.ar/img/whatsApp.png" alt="logo whatsapp">
+                  </a>
+                </figure>
+    
+                <figure class="icon-redes">
+                  <a href="mailto:ventas@mendohardware.com.ar" target="_blank">
+                    <img src="https://mendohardware.com.ar/img/email.png" alt="logo correo">
+                  </a>
+                </figure>
+        
+            </div>
+            <h5>*Práctica desarrollada a partir del curso MATEMÁTICA Y ESTADÍSTICA BÁSICA CON JavaScript de Platzi @juanDC</h5>
+    
+        </footer>
 
     </main>
 

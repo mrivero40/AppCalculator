@@ -38,7 +38,7 @@ function proyeccionSalarial(personaProyeccion) {
     return proyeccion;
 };
 
-console.log(salarios);
+// Restructurando la información de salarios.js
 const empresas = {};
 for(persona of salarios) {
     for(trabajo of persona.trabajos) {
@@ -122,26 +122,7 @@ function calcularTop10(){
     return medianaTop10;
 };
 
-// Mostrando información seleccionada en HTML
-/*
-        <section class="analisis-container">
-            <h2>Analisis Salarial</h2>
-            <div class="info-container">
-                <h3>Elegir persona para información salarial:</h3>
-                <label for="selectPersonal">Seleccionar</label>
-                <select id="selectPersonal">
-                    <option value="">--Nombre del empleado--</option>
-                </select>
-                <button id="btnPersonal" type="text">Mostrar</button>
-                <p id="pPersonal"></p>
-                <div id="divContainerPersonal">
-                    <p id="pResultPersonal"></p>
-                </div>
-                <div id="btnContainer"></div>
-                <div id="divCalcResult"></div>
-            </div>
-        </section>
-*/
+// Análisis salarial x empleado en HTML
 function renderInfoPersonal() {
     const selectPersonal = document.querySelector("#selectPersonal");
     for ( persona of salarios ) {
@@ -156,6 +137,7 @@ function renderInfoPersonal() {
     btnPersonal.addEventListener('click', () => {
         const divContainerPersonal = document.querySelector('#divContainerPersonal');
         divContainerPersonal.innerText = '';
+        divCalcResult.innerText = '';        
         
         const pPersonal = document.querySelector('#pPersonal');
         pPersonal.classList.add('p-result-name');
@@ -168,7 +150,7 @@ function renderInfoPersonal() {
             divContainerPersonal.appendChild(pResultPersonal);            
         };
 
-        const btnContainer = document.querySelector('#btnContainer');
+        const btnContainer = document.querySelector('#btnContainer');        
         const btnMedianaPersona = document.createElement('button');
         const btnProyeccionPersona = document.createElement('button');
         btnMedianaPersona.classList.add('btn-calc-persona');
@@ -193,7 +175,7 @@ function renderInfoPersonal() {
             const divCalcResult = document.querySelector('#divCalcResult');
             divCalcResult.innerText = '';
             const arrayProyeccion = proyeccionSalarial(objPersona.name);
-            
+
             for ( proyeccion of arrayProyeccion ) {
                 const pCalcResult = document.createElement('p');
                 pCalcResult.style.fontWeight='bold';
@@ -204,3 +186,50 @@ function renderInfoPersonal() {
     });
 };
 renderInfoPersonal();
+
+/*
+        <section class="analisis-container">
+            <h2>Analisis Empresarial x Empresa</h2>
+            <div class="info-container">
+                <h3>Elegir Empresa para más información:</h3>
+                <label for="selectEmpresa">Seleccionar</label>
+                <select id="selectEmpresa">
+                    <option value="">--Nombre de la Empresa--</option>
+                </select>
+                <button id="btnEmpresa" class="btn-calc-persona" type="text">Buscar</button>
+                <p id="pEmpresa"></p>
+                <div id="divContainerEmpresa">
+                </div>
+                <div id="btnContainerEmpresa"></div>
+                <div id="divCalcResultEmpresa"></div>
+            </div>
+        </section>
+*/
+
+// Análisis de sueldos x empresa en HTML
+function renderInfoEmpresa() {
+    const selectEmpresa = document.querySelector('#selectEmpresa');
+    const btnEmpresa = document.querySelector('#btnEmpresa');
+    const pEmpresa = document.querySelector('#pEmpresa');
+    const divContainerEmpresa = document.querySelector('#divContainerEmpresa');
+
+    for ( empresa of Object.keys(empresas)) {
+        const optionSelect = document.createElement('option');
+        optionSelect.innerText = empresa;
+        selectEmpresa.appendChild(optionSelect);
+    };
+
+    btnEmpresa.addEventListener('click', () => {
+        const selectEmpresaValue = selectEmpresa.value;
+        pEmpresa.innerText = selectEmpresaValue;
+        const arrayEmpresas = Object.entries(empresas[selectEmpresaValue]);
+        console.log(arrayEmpresas);
+        for ( item of arrayEmpresas ) {
+            const pResultEmpresa = document.createElement('p');
+            pResultEmpresa.innerText = `Año: ${item[0]} | Sueldos: ${item[1].length} | Importes: u$s ${item[1]}`;
+            divContainerEmpresa.appendChild(pResultEmpresa);
+        }
+    });
+
+};
+renderInfoEmpresa();
