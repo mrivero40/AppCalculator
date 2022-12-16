@@ -142,7 +142,7 @@ function renderInfoPersonal() {
         const pPersonal = document.querySelector('#pPersonal');
         pPersonal.classList.add('p-result-name');
         const objPersona = encontrarPersonas(selectPersonal.value);
-        pPersonal.innerText = objPersona.name;
+        pPersonal.innerText = `${objPersona.name} - información:`;
         
         for ( trabajo of objPersona.trabajos ) {            
             let pResultPersonal = document.createElement('p');
@@ -167,7 +167,7 @@ function renderInfoPersonal() {
             const pCalcResult = document.createElement('p');
             pCalcResult.innerText = 
                 `La mediana de salarios de ${objPersona.name} es de u$${medianaXPersona(objPersona.name)}`;
-            pCalcResult.style.fontWeight='bold';
+            pCalcResult.style.fontWeight = 'bold';
             divCalcResult.appendChild(pCalcResult);
         });
 
@@ -187,31 +187,14 @@ function renderInfoPersonal() {
 };
 renderInfoPersonal();
 
-/*
-        <section class="analisis-container">
-            <h2>Analisis Empresarial x Empresa</h2>
-            <div class="info-container">
-                <h3>Elegir Empresa para más información:</h3>
-                <label for="selectEmpresa">Seleccionar</label>
-                <select id="selectEmpresa">
-                    <option value="">--Nombre de la Empresa--</option>
-                </select>
-                <button id="btnEmpresa" class="btn-calc-persona" type="text">Buscar</button>
-                <p id="pEmpresa"></p>
-                <div id="divContainerEmpresa">
-                </div>
-                <div id="btnContainerEmpresa"></div>
-                <div id="divCalcResultEmpresa"></div>
-            </div>
-        </section>
-*/
-
 // Análisis de sueldos x empresa en HTML
 function renderInfoEmpresa() {
     const selectEmpresa = document.querySelector('#selectEmpresa');
     const btnEmpresa = document.querySelector('#btnEmpresa');
     const pEmpresa = document.querySelector('#pEmpresa');
     const divContainerEmpresa = document.querySelector('#divContainerEmpresa');
+    const btnContainerEmpresa = document.querySelector('#btnContainerEmpresa');
+    const divCalcResultEmpresa = document.querySelector('#divCalcResultEmpresa');
 
     for ( empresa of Object.keys(empresas)) {
         const optionSelect = document.createElement('option');
@@ -220,15 +203,49 @@ function renderInfoEmpresa() {
     };
 
     btnEmpresa.addEventListener('click', () => {
+        divContainerEmpresa.innerText = '';
+        btnContainerEmpresa.innerText = '';
+
         const selectEmpresaValue = selectEmpresa.value;
         pEmpresa.innerText = selectEmpresaValue;
+        pEmpresa.classList.add('p-result-name');
         const arrayEmpresas = Object.entries(empresas[selectEmpresaValue]);
-        console.log(arrayEmpresas);
+        const arraySueldos = [];
+        
         for ( item of arrayEmpresas ) {
+            arraySueldos.push(item[1].reduce((valorAcumulado, nuevoValor) => (valorAcumulado + nuevoValor) / item[1].length));
             const pResultEmpresa = document.createElement('p');
             pResultEmpresa.innerText = `Año: ${item[0]} | Sueldos: ${item[1].length} | Importes: u$s ${item[1]}`;
             divContainerEmpresa.appendChild(pResultEmpresa);
         }
+        console.log(arrayEmpresas);
+        console.log(arraySueldos);
+
+        const btnMedianaEmpresa = document.createElement('button');
+        const btnProyeccionEmpresa = document.createElement('button');
+        btnMedianaEmpresa.innerText = 'Promedio de sueldos';
+        btnProyeccionEmpresa.innerText = 'Proyección';
+        btnMedianaEmpresa.classList.add('btn-calc-persona');
+        btnProyeccionEmpresa.classList.add('btn-calc-persona');
+        btnContainerEmpresa.appendChild(btnMedianaEmpresa);
+        btnContainerEmpresa.appendChild(btnProyeccionEmpresa);
+
+        btnMedianaEmpresa.addEventListener('click', () => {   
+            divCalcResultEmpresa.innerText = '';         
+            const promedioEmpresa = MhMath.calcularPromedioSinRender(arraySueldos);
+            const pResultPromedio = document.createElement('p');
+            pResultPromedio.style.fontWeight = 'bold';
+            pResultPromedio.innerText = `El promedio de sueldos es: u$s ${promedioEmpresa.toFixed(2)}`;
+            divCalcResultEmpresa.appendChild(pResultPromedio);
+        });
+
+        btnProyeccionEmpresa.addEventListener('click', () => {
+            divCalcResultEmpresa.innerText = '';
+            const pResultProyeccion = document.createElement('p');
+            pResultProyeccion.style.fontWeight = 'bold';
+            pResultProyeccion.innerText = `Proyección de sueldos para el próximo año es u$s:${calcularProyeccionEmpresas(selectEmpresaValue).toFixed(2)}`;
+            divCalcResultEmpresa.appendChild(pResultProyeccion);
+        });
     });
 
 };
